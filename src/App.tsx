@@ -1,31 +1,19 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Layout } from './components/layout/Layout';
+import { Home } from './pages/Home';
+import { Projects } from './pages/Projects';
 import './index.css';
-import { Header } from './components/layout/Header';
-import { Footer } from './components/layout/Footer';
-import { Hero } from './components/sections/Hero';
-import { Industries } from './components/sections/Industries';
-import { WhatWeBuild } from './components/sections/WhatWeBuild';
-import { Process } from './components/sections/Process';
-import { SelectedWork } from './components/sections/SelectedWork';
-import { Technology } from './components/sections/Technology';
-import { About } from './components/sections/About';
-import { CtaBanner } from './components/sections/CtaBanner';
 
 function App() {
   return (
-    <>
-      <Header />
-      <main>
-        <Hero />
-        <Industries />
-        <WhatWeBuild />
-        <Process />
-        <SelectedWork />
-        <Technology />
-        <About />
-        <CtaBanner />
-      </main>
-      <Footer />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="projects" element={<Projects />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 

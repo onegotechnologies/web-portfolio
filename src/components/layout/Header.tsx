@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { LogoMark } from '../ui/LogoMark';
 import { Button } from '../ui/Button';
 
 const navLinks = [
-  { label: 'Work', href: '#work' },
-  { label: 'Expertise', href: '#expertise' },
-  { label: 'Industries', href: '#industries' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Expertise', href: '/#engineering' },
+  { label: 'Industries', href: '/#industries' },
+  { label: 'About', href: '/#about' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 export const Header: React.FC = () => {
@@ -40,9 +41,9 @@ export const Header: React.FC = () => {
         <div className="max-w-[1320px] mx-auto px-6 md:px-10 lg:px-16">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <a href="#" aria-label="OneGo Technologies — Home" className="shrink-0">
+            <Link to="/" aria-label="OneGo Technologies — Home" className="shrink-0">
               <LogoMark height={32} />
-            </a>
+            </Link>
 
             {/* Desktop Nav */}
             <nav
@@ -50,14 +51,14 @@ export const Header: React.FC = () => {
               aria-label="Main navigation"
             >
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.label}
-                  href={link.href}
+                  to={link.href}
                   className="font-display text-sm font-medium text-[#8A8A86] hover:text-white transition-colors duration-150 tracking-tight relative group"
                 >
                   {link.label}
                   <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#B7FF3C] group-hover:w-full transition-all duration-200" />
-                </a>
+                </Link>
               ))}
             </nav>
 
@@ -112,14 +113,14 @@ export const Header: React.FC = () => {
           <ul className="space-y-2">
             {navLinks.map((link, i) => (
               <li key={link.label}>
-                <a
-                  href={link.href}
+                <Link
+                  to={link.href}
                   onClick={handleNavClick}
                   className="font-display text-4xl font-semibold text-white/80 hover:text-white transition-colors duration-150 block py-3 tracking-tight"
                   style={{ transitionDelay: menuOpen ? `${i * 50}ms` : '0ms' }}
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
