@@ -28,47 +28,47 @@ export const Process: React.FC = () => {
   const { ref, isInView } = useInView<HTMLElement>({ threshold: 0.1 });
 
   return (
-    <section ref={ref} className="bg-[#050505] py-28 lg:py-40">
+    <section ref={ref} id="process" className="bg-[#F7F9FC] py-28 lg:py-36 border-b border-[#D9E1EC] scroll-mt-20 lg:scroll-mt-24">
       <div className="max-w-[1320px] mx-auto px-6 md:px-10 lg:px-16">
         {/* Header */}
         <div className={`mb-16 lg:mb-20 reveal ${isInView ? 'visible' : ''}`}>
           <div className="flex items-center gap-3 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#B7FF3C]" />
-            <span className="font-display text-xs font-medium text-[#8A8A86] tracking-[0.2em] uppercase">
-              How we work
+            <span className="w-2 h-2 bg-[#1264FF]" />
+            <span className="font-display text-xs font-semibold text-[#5B667A] tracking-[0.2em] uppercase">
+              How We Work
             </span>
           </div>
           <h2
-            className="font-display font-bold text-white tracking-tight max-w-2xl"
+            className="font-display font-bold text-[#101828] tracking-tight max-w-2xl"
             style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
           >
             A repeatable process.
             <br />
-            <span className="text-[#8A8A86]">Not a repeatable outcome.</span>
+            <span className="text-[#5B667A]">Not a repeatable outcome.</span>
           </h2>
         </div>
 
         {/* Steps — horizontal on desktop, stacked on mobile */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-white/[0.08]">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 border-t border-[#D9E1EC]">
           {steps.map((step, i) => (
             <div
               key={step.num}
-              className={`pt-10 pb-8 pr-8 border-b border-white/[0.08] lg:border-b-0 lg:border-r last:border-r-0 lg:last:border-r-0 reveal ${isInView ? 'visible' : ''} reveal-delay-${i + 1}`}
+              className={`px-6 sm:px-8 lg:px-10 py-12 lg:py-16 border-b border-[#D9E1EC] lg:border-b-0 lg:border-r border-[#D9E1EC] last:border-r-0 transition-colors duration-200 hover:bg-white/60 reveal ${
+                isInView ? 'visible' : ''
+              } reveal-delay-${i + 1}`}
             >
-              {/* Number + connecting line */}
-              <div className="flex items-center gap-4 mb-6">
-                <span className="font-display text-xs font-medium text-[#B7FF3C] tracking-[0.15em]">
-                  {step.num}
+              {/* Step indicator with generous breathing space */}
+              <div className="flex items-center gap-3 mb-8">
+                <span className="font-display text-sm font-bold text-[#1264FF] tracking-[0.2em] uppercase">
+                  Phase {step.num}
                 </span>
-                {i < steps.length - 1 && (
-                  <div className="hidden lg:block flex-1 h-px bg-white/[0.1]" />
-                )}
+                <span className="w-1.5 h-1.5 bg-[#1264FF]" />
               </div>
 
-              <h3 className="font-display font-semibold text-white text-xl tracking-tight mb-4">
+              <h3 className="font-display font-bold text-[#101828] text-2xl tracking-tight mb-5">
                 {step.title}
               </h3>
-              <p className="font-body text-[#8A8A86] text-sm leading-relaxed">
+              <p className="font-body text-[#5B667A] text-sm leading-relaxed">
                 {step.body}
               </p>
             </div>
@@ -78,3 +78,4 @@ export const Process: React.FC = () => {
     </section>
   );
 };
+
