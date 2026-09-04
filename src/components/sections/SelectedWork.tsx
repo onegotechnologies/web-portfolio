@@ -11,7 +11,6 @@ const projects = [
     solution:
       'A unified digital platform connecting patient management, staff workflows, and operational reporting.',
     tech: ['React', 'Node.js', 'PostgreSQL', 'Docker'],
-    status: 'placeholder',
   },
   {
     index: '02',
@@ -22,7 +21,6 @@ const projects = [
     solution:
       'An end-to-end property management system with customer-facing interfaces and internal operations dashboards.',
     tech: ['Next.js', 'Go', 'PostgreSQL', 'AWS'],
-    status: 'placeholder',
   },
   {
     index: '03',
@@ -33,7 +31,6 @@ const projects = [
     solution:
       'A real-time fleet tracking and operations management platform with driver apps and management dashboards.',
     tech: ['React Native', 'Node.js', 'MongoDB', 'Kubernetes'],
-    status: 'placeholder',
   },
   {
     index: '04',
@@ -44,7 +41,6 @@ const projects = [
     solution:
       'An intelligent automation system with ML-powered document extraction and workflow routing.',
     tech: ['Python', 'FastAPI', 'React', 'PostgreSQL'],
-    status: 'placeholder',
   },
 ];
 
@@ -55,85 +51,102 @@ export const SelectedWork: React.FC = () => {
     <section
       id="work"
       ref={ref}
-      className="bg-[#0A0A0A] py-28 lg:py-40"
+      className="bg-[#061536] py-28 lg:py-36 text-white"
     >
       <div className="max-w-[1320px] mx-auto px-6 md:px-10 lg:px-16">
         {/* Header */}
         <div className={`mb-16 lg:mb-20 reveal ${isInView ? 'visible' : ''}`}>
           <div className="flex items-center gap-3 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#B7FF3C]" />
-            <span className="font-display text-xs font-medium text-[#8A8A86] tracking-[0.2em] uppercase">
-              Selected work
+            <span className="w-2 h-2 bg-[#1264FF]" />
+            <span className="font-display text-xs font-semibold text-[#D9E1EC] tracking-[0.2em] uppercase">
+              Selected Work
             </span>
           </div>
           <div className="grid lg:grid-cols-2 gap-8 items-end">
             <h2
               className="font-display font-bold text-white tracking-tight"
-              style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
+              style={{ fontSize: 'clamp(2.5rem, 4.5vw, 4rem)' }}
             >
               Projects built for
               <br />
-              real operations.
+              <span className="text-[#1D6BFF]">real operations.</span>
             </h2>
-            <p className="font-body text-[#8A8A86] text-base leading-relaxed max-w-sm">
-              We build software that runs in production — not prototypes. Each engagement
-              is a long-term commitment to the client's operational success.
+            <p className="font-body text-[#D9E1EC] text-base lg:text-lg leading-relaxed max-w-md">
+              We build software designed for production — engineered for long-term operational resilience, high concurrency, and real enterprise scale.
             </p>
           </div>
         </div>
 
-        {/* Project grid */}
-        <div className="space-y-0 border-t border-white/[0.08]">
+        {/* Project list */}
+        <div className="space-y-8">
           {projects.map((proj, i) => (
             <div
               key={proj.index}
-              className={`group border-b border-white/[0.08] py-10 lg:py-14 reveal ${isInView ? 'visible' : ''} reveal-delay-${Math.min(i + 1, 4)}`}
+              className={`group bg-white/[0.015] border border-white/[0.08] hover:border-[#1264FF]/40 hover:bg-white/[0.03] p-8 lg:p-10 transition-all duration-300 reveal ${
+                isInView ? 'visible' : ''
+              } reveal-delay-${Math.min(i + 1, 4)}`}
             >
-              <div className="grid lg:grid-cols-[120px,1fr,300px] gap-8 lg:gap-16 items-start">
-                {/* Index + industry */}
-                <div>
-                  <div className="font-display text-xs text-[#8A8A86]/50 tracking-[0.2em] mb-3">
+              <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                {/* Index + industry (col-span-2) */}
+                <div className="lg:col-span-2">
+                  <span className="font-display text-base font-bold text-[#1264FF] tracking-[0.2em] mb-3 block">
                     {proj.index}
-                  </div>
-                  <span className="inline-block font-display text-xs font-medium text-[#B7FF3C] bg-[#B7FF3C]/10 border border-[#B7FF3C]/20 px-2.5 py-1 tracking-wide">
+                  </span>
+                  <span className="inline-block font-display text-xs font-semibold text-[#1264FF] bg-[#1264FF]/10 border border-[#1264FF]/30 px-3 py-1.5 tracking-wider uppercase">
                     {proj.industry}
                   </span>
                 </div>
 
-                {/* Main content */}
-                <div>
-                  <h3 className="font-display font-semibold text-white text-xl lg:text-2xl tracking-tight mb-4 group-hover:text-white/90 transition-colors">
+                {/* Main content (col-span-7) */}
+                <div className="lg:col-span-7">
+                  <h3 className="font-display font-bold text-white text-2xl lg:text-3xl tracking-tight mb-5 group-hover:text-[#1D6BFF] transition-colors">
                     {proj.type}
                   </h3>
-                  <p className="font-body text-[#8A8A86] text-sm leading-relaxed mb-4 max-w-lg">
-                    <strong className="text-white/60 font-display text-xs tracking-wide uppercase mr-2">Problem:</strong>
-                    {proj.problem}
-                  </p>
-                  <p className="font-body text-[#8A8A86] text-sm leading-relaxed max-w-lg">
-                    <strong className="text-white/60 font-display text-xs tracking-wide uppercase mr-2">Solution:</strong>
-                    {proj.solution}
-                  </p>
+                  <div className="space-y-4">
+                    <div className="bg-black/20 border border-white/[0.05] p-5">
+                      <span className="text-[#1D6BFF] font-display text-xs font-bold tracking-wider uppercase block mb-1.5">
+                        Operational Challenge
+                      </span>
+                      <p className="font-body text-[#D9E1EC] text-sm leading-relaxed">
+                        {proj.problem}
+                      </p>
+                    </div>
+                    <div className="bg-black/20 border border-white/[0.05] p-5">
+                      <span className="text-[#1D6BFF] font-display text-xs font-bold tracking-wider uppercase block mb-1.5">
+                        Delivered Architecture
+                      </span>
+                      <p className="font-body text-[#D9E1EC] text-sm leading-relaxed">
+                        {proj.solution}
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Tech stack */}
-                <div className="flex flex-col justify-between h-full gap-6">
+                {/* Tech stack & Action (col-span-3) */}
+                <div className="lg:col-span-3 flex flex-col justify-between h-full pt-1">
                   <div>
-                    <p className="font-display text-xs text-[#8A8A86]/50 tracking-[0.15em] uppercase mb-3">
-                      Technology
-                    </p>
+                    <span className="font-display text-xs text-[#D9E1EC]/70 tracking-[0.15em] uppercase mb-3.5 block font-semibold">
+                      Technologies
+                    </span>
                     <div className="flex flex-wrap gap-2">
                       {proj.tech.map((t) => (
                         <span
                           key={t}
-                          className="font-display text-xs text-white/50 bg-white/[0.04] border border-white/[0.08] px-2.5 py-1"
+                          className="font-display text-xs text-[#D9E1EC] bg-white/[0.04] border border-white/[0.1] px-3 py-1.5"
                         >
                           {t}
                         </span>
                       ))}
                     </div>
                   </div>
-                  <div className="text-[#8A8A86]/30 group-hover:text-[#8A8A86]/60 group-hover:translate-x-1 transition-all duration-200 text-sm font-display">
-                    →
+
+                  <div className="mt-8 pt-6 border-t border-white/[0.06] flex items-center justify-between">
+                    <span className="font-display text-xs text-[#D9E1EC]/60 uppercase tracking-widest font-medium">
+                      Enterprise Tier
+                    </span>
+                    <span className="text-[#1264FF] text-xl font-bold group-hover:translate-x-2 transition-transform duration-200">
+                      →
+                    </span>
                   </div>
                 </div>
               </div>
@@ -144,3 +157,4 @@ export const SelectedWork: React.FC = () => {
     </section>
   );
 };
+

@@ -25,9 +25,9 @@ export const Technology: React.FC = () => {
       className="bg-[#F4F3EF] py-24 lg:py-32 border-t border-[#111111]/10"
     >
       <div className="max-w-[1320px] mx-auto px-6 md:px-10 lg:px-16">
-        <div className="grid lg:grid-cols-[1fr,2fr] gap-16 items-start">
+        <div className="grid lg:grid-cols-12 gap-16 items-start">
           {/* Label */}
-          <div className={`reveal ${isInView ? 'visible' : ''}`}>
+          <div className={`lg:col-span-4 reveal ${isInView ? 'visible' : ''}`}>
             <div className="flex items-center gap-3 mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-[#050505]" />
               <span className="font-display text-xs font-medium text-[#8A8A86] tracking-[0.2em] uppercase">
@@ -42,7 +42,7 @@ export const Technology: React.FC = () => {
 
           {/* Tech tags */}
           <div
-            className={`flex flex-wrap gap-3 reveal ${isInView ? 'visible' : ''} reveal-delay-2`}
+            className={`lg:col-span-8 flex flex-wrap gap-3 reveal ${isInView ? 'visible' : ''} reveal-delay-2`}
           >
             {techStack.map((tech) => (
               <div

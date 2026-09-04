@@ -2,21 +2,31 @@
 
 /* =========================================================
    ONEGO TECHNOLOGIES — DESIGN SYSTEM
-   Primary: Black/White/Off-White  Accent: #B7FF3C (lime)
+   Primary: Deep Navy (#061536) / White / Off-White  Accent: Primary Blue (#1264FF)
    Fonts: Space Grotesk (display) + Inter (body)
    ========================================================= */
 
 @theme {
-  /* Color Tokens */
-  --color-og-black: #050505;
-  --color-og-deep: #0A0A0A;
+  /* Final Brand Color Tokens */
+  --color-og-navy: #061536;
+  --color-og-navy-dark: #030B1C;
+  --color-og-navy-light: #0B2252;
+  --color-og-blue: #1264FF;
+  --color-og-blue-bright: #1D6BFF;
+  --color-og-blue-subtle: #EEF3FA;
   --color-og-white: #FFFFFF;
-  --color-og-offwhite: #F4F3EF;
-  --color-og-lightgray: #E7E7E3;
-  --color-og-midgray: #8A8A86;
-  --color-og-darktext: #111111;
-  --color-og-accent: #B7FF3C;
-  --color-og-accent-dim: #8FCC2E;
+  --color-og-offwhite: #F7F9FC;
+  --color-og-lightgray: #EEF3FA;
+  --color-og-softgray: #D9E1EC;
+  --color-og-darktext: #101828;
+  --color-og-secondary: #5B667A;
+
+  /* Legacy mapping aliases updated to new brand palette */
+  --color-og-black: #061536;
+  --color-og-deep: #030B1C;
+  --color-og-midgray: #5B667A;
+  --color-og-accent: #1264FF;
+  --color-og-accent-dim: #1D6BFF;
 
   /* Typography */
   --font-display: 'Space Grotesk', system-ui, sans-serif;
@@ -69,6 +79,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
   font-size: 16px;
 }
 
@@ -156,20 +167,23 @@ body {
    CUSTOM SCROLLBAR
    ========================================================= */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-og-deep);
+  background: var(--color-og-navy-dark);
 }
 ::-webkit-scrollbar-thumb {
-  background: #2a2a2a;
-  border-radius: 2px;
+  background: #1B2B50;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-og-blue);
 }
 
 /* =========================================================
    SELECTION COLOR
    ========================================================= */
 ::selection {
-  background-color: var(--color-og-accent);
-  color: var(--color-og-black);
+  background-color: var(--color-og-blue);
+  color: var(--color-og-white);
 }
