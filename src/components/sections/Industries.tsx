@@ -103,7 +103,7 @@ const IndustryVisual: React.FC<{ blocks: Industry['visualBlocks']; active: boole
     {/* Fine grid */}
     <defs>
       <pattern id={`g-${title}`} width="10" height="10" patternUnits="userSpaceOnUse">
-        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="0.3" />
+        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(6,21,54,0.06)" strokeWidth="0.5" />
       </pattern>
     </defs>
     <rect width="100" height="100" fill={`url(#g-${title})`} />
@@ -116,9 +116,9 @@ const IndustryVisual: React.FC<{ blocks: Industry['visualBlocks']; active: boole
         y={b.y}
         width={b.w}
         height={b.h}
-        fill={active ? `rgba(183,255,60,${b.opacity * 0.9})` : `rgba(255,255,255,${b.opacity * 0.7})`}
-        stroke={active ? `rgba(183,255,60,${b.opacity + 0.15})` : `rgba(255,255,255,${b.opacity + 0.1})`}
-        strokeWidth="0.5"
+        fill={active ? `rgba(18,100,255,${b.opacity * 0.9})` : `rgba(6,21,54,${b.opacity * 0.5})`}
+        stroke={active ? `rgba(18,100,255,${b.opacity + 0.2})` : `rgba(6,21,54,${b.opacity + 0.1})`}
+        strokeWidth="0.8"
         className="transition-all duration-500"
         rx="0"
       />
@@ -127,15 +127,14 @@ const IndustryVisual: React.FC<{ blocks: Industry['visualBlocks']; active: boole
     {/* Arrow motif when active */}
     {active && (
       <g>
-        <line x1="35" y1="50" x2="55" y2="50" stroke="rgba(183,255,60,0.8)" strokeWidth="1.5" strokeLinecap="round" />
-        <polyline points="50,45 55,50 50,55" fill="none" stroke="rgba(183,255,60,0.8)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1="35" y1="50" x2="55" y2="50" stroke="#1264FF" strokeWidth="1.5" strokeLinecap="round" />
+        <polyline points="50,45 55,50 50,55" fill="none" stroke="#1264FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         {/* Active dot */}
-        <circle cx="85" cy="15" r="2.5" fill="#B7FF3C" />
+        <circle cx="85" cy="15" r="2.5" fill="#1264FF" />
       </g>
     )}
   </svg>
 );
-
 
 export const Industries: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -147,38 +146,38 @@ export const Industries: React.FC = () => {
     <section
       id="industries"
       ref={ref}
-      className="bg-[#050505] py-28 lg:py-40"
+      className="bg-[#F7F9FC] py-28 lg:py-36 border-b border-[#D9E1EC] scroll-mt-20 lg:scroll-mt-24"
     >
       <div className="max-w-[1320px] mx-auto px-6 md:px-10 lg:px-16">
         {/* Section header */}
-        <div className={`mb-16 lg:mb-24 reveal ${isInView ? 'visible' : ''}`}>
+        <div className={`mb-16 lg:mb-20 reveal ${isInView ? 'visible' : ''}`}>
           <div className="flex items-center gap-3 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#B7FF3C]" />
-            <span className="font-display text-xs font-medium text-[#8A8A86] tracking-[0.2em] uppercase">
-              Industry focus
+            <span className="w-2 h-2 bg-[#1264FF]" />
+            <span className="font-display text-xs font-semibold text-[#5B667A] tracking-[0.2em] uppercase">
+              Industry Focus
             </span>
           </div>
           <h2
-            className="font-display font-bold text-white tracking-tight"
+            className="font-display font-bold text-[#101828] tracking-tight"
             style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
           >
             Four complex industries.
             <br />
-            <span className="text-[#8A8A86]">One engineering approach.</span>
+            <span className="text-[#5B667A]">One engineering approach.</span>
           </h2>
         </div>
 
         {/* Industry explorer — desktop: two-column; mobile: stacked accordion */}
-        <div className="lg:grid lg:grid-cols-[1fr,420px] lg:gap-20 items-start">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-start">
           {/* Left: industry list */}
           <div
-            className={`space-y-0 border-t border-white/[0.08] reveal ${isInView ? 'visible' : ''} reveal-delay-2`}
+            className={`lg:col-span-7 space-y-0 border-t border-[#D9E1EC] reveal ${isInView ? 'visible' : ''} reveal-delay-2`}
           >
             {industries.map((industry, i) => (
               <div
                 key={industry.num}
-                className={`group border-b border-white/[0.08] transition-all duration-300 cursor-pointer ${
-                  activeIndex === i ? 'bg-white/[0.02]' : 'hover:bg-white/[0.015]'
+                className={`group border-b border-[#D9E1EC] transition-all duration-200 cursor-pointer ${
+                  activeIndex === i ? 'bg-white shadow-sm' : 'hover:bg-white/50'
                 }`}
                 onClick={() => setActiveIndex(i)}
                 onMouseEnter={() => setActiveIndex(i)}
@@ -188,64 +187,58 @@ export const Industries: React.FC = () => {
                 aria-expanded={activeIndex === i}
                 aria-label={`View ${industry.title} details`}
               >
-                <div className="py-8 px-2 flex items-start justify-between gap-6">
+                <div className="py-7 px-4 md:px-6 flex items-start justify-between gap-6">
                   {/* Number + title */}
                   <div className="flex items-start gap-6">
                     <span
-                      className={`font-display text-sm font-medium transition-colors duration-200 mt-1 ${
-                        activeIndex === i ? 'text-[#B7FF3C]' : 'text-[#8A8A86]/60'
+                      className={`font-display text-sm font-semibold transition-colors duration-200 mt-1 ${
+                        activeIndex === i ? 'text-[#1264FF]' : 'text-[#5B667A]/60'
                       }`}
                     >
                       {industry.num}
                     </span>
                     <div>
                       <h3
-                        className={`font-display font-semibold tracking-tight transition-colors duration-200 ${
-                          activeIndex === i ? 'text-white' : 'text-white/70'
+                        className={`font-display font-bold tracking-tight transition-colors duration-200 ${
+                          activeIndex === i ? 'text-[#101828]' : 'text-[#101828]/80'
                         }`}
-                        style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)' }}
+                        style={{ fontSize: 'clamp(1.25rem, 2.2vw, 1.75rem)' }}
                       >
                         {industry.title}
                       </h3>
-                      <p className="font-body text-[#8A8A86] text-sm mt-1 leading-snug max-w-xs">
+                      <p className="font-body text-[#5B667A] text-sm mt-1 leading-snug max-w-sm">
                         {industry.tagline}
                       </p>
 
-                      {/* Expandable content — mobile & desktop inline */}
+                      {/* Expandable content — mobile inline */}
                       <div
-                        className={`overflow-hidden transition-all duration-400 ease-in-out ${
+                        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
                           activeIndex === i
-                            ? 'max-h-[500px] opacity-100 mt-5'
+                            ? 'max-h-[500px] opacity-100 mt-5 pt-4 border-t border-[#D9E1EC]'
                             : 'max-h-0 opacity-0 mt-0'
                         }`}
                       >
-                        <p className="font-body text-[#8A8A86] text-sm leading-relaxed mb-5">
+                        <p className="font-body text-[#5B667A] text-sm leading-relaxed mb-4">
                           {industry.description}
                         </p>
                         <ul className="space-y-2">
                           {industry.capabilities.map((cap) => (
                             <li
                               key={cap}
-                              className="flex items-center gap-2.5 font-body text-sm text-white/60"
+                              className="flex items-center gap-2.5 text-xs font-display text-[#101828]"
                             >
-                              <span className="w-1 h-1 rounded-full bg-[#B7FF3C]/70 shrink-0" />
+                              <span className="w-1.5 h-1.5 bg-[#1264FF]" />
                               {cap}
                             </li>
                           ))}
                         </ul>
-
-                        {/* Mobile visual (shown inside accordion on small screens) */}
-                        <div className="lg:hidden mt-8 h-32 opacity-60">
-                          <IndustryVisual blocks={industry.visualBlocks} active={true} title={industry.title} />
-                        </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Arrow indicator */}
                   <span
-                    className={`shrink-0 transition-all duration-200 mt-2 ${
-                      activeIndex === i ? 'text-[#B7FF3C] translate-x-1' : 'text-[#8A8A86]/40'
+                    className={`font-display text-lg transition-transform duration-200 ${
+                      activeIndex === i ? 'text-[#1264FF] translate-x-1' : 'text-[#5B667A]/40'
                     }`}
                   >
                     →
@@ -255,38 +248,50 @@ export const Industries: React.FC = () => {
             ))}
           </div>
 
-          {/* Right: visual panel — desktop only */}
+          {/* Right: Desktop preview card with architectural visual */}
           <div
-            className={`hidden lg:block sticky top-28 reveal ${isInView ? 'visible' : ''} reveal-delay-3`}
+            className={`hidden lg:block lg:col-span-5 bg-white border border-[#D9E1EC] p-8 reveal ${
+              isInView ? 'visible' : ''
+            } reveal-delay-3 sticky top-28 shadow-sm`}
           >
-            <div className="bg-white/[0.03] border border-white/[0.07] p-8 aspect-square relative overflow-hidden">
-              {/* Number watermark */}
-              <div
-                className="absolute top-6 left-6 font-display font-bold text-white/[0.04] transition-all duration-500 select-none pointer-events-none"
-                style={{ fontSize: '7rem', lineHeight: 1 }}
-              >
-                {active.num}
-              </div>
+            {/* Visual canvas */}
+            <div className="h-56 bg-[#EEF3FA] border border-[#D9E1EC] mb-6 p-4">
+              <IndustryVisual
+                blocks={active.visualBlocks}
+                active={true}
+                title={active.title}
+              />
+            </div>
 
-              {/* Visual composition */}
-              <div className="relative z-10 h-full flex flex-col justify-between">
-                <div className="h-48 opacity-80">
-                  <IndustryVisual blocks={active.visualBlocks} active={true} title={active.title} />
-                </div>
+            {/* Description */}
+            <div className="mb-6">
+              <span className="font-display text-xs text-[#1264FF] font-semibold tracking-wider uppercase mb-1 block">
+                {active.num} · Domain Focus
+              </span>
+              <h4 className="font-display text-xl font-bold text-[#101828] mb-3">
+                {active.title}
+              </h4>
+              <p className="font-body text-[#5B667A] text-sm leading-relaxed">
+                {active.description}
+              </p>
+            </div>
 
-                {/* Industry label */}
-                <div className="mt-6">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#B7FF3C]" />
-                    <span className="font-display text-xs text-[#B7FF3C] tracking-[0.15em] uppercase">
-                      {active.title}
-                    </span>
-                  </div>
-                  <p className="font-display text-white/80 text-sm leading-snug">
-                    {active.tagline}
-                  </p>
-                </div>
-              </div>
+            {/* Capabilities list */}
+            <div>
+              <p className="font-display text-[11px] text-[#5B667A] tracking-[0.15em] uppercase mb-3 font-medium">
+                Key Capabilities
+              </p>
+              <ul className="space-y-2">
+                {active.capabilities.map((cap) => (
+                  <li
+                    key={cap}
+                    className="flex items-center gap-2.5 font-display text-xs text-[#101828]"
+                  >
+                    <span className="w-1.5 h-1.5 bg-[#1264FF]" />
+                    {cap}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -294,3 +299,4 @@ export const Industries: React.FC = () => {
     </section>
   );
 };
+
