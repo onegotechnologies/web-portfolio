@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ScrollManager } from './components/common/ScrollManager';
 import { Layout } from './components/layout/Layout';
 import { Home } from './pages/Home';
 import { Projects } from './pages/Projects';
@@ -7,6 +8,7 @@ import './index.css';
 function App() {
   return (
     <Router>
+      <ScrollManager />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
