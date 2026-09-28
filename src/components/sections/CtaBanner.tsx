@@ -16,15 +16,45 @@ export const CtaBanner: React.FC = () => {
 
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    // Working submission handling with local feedback
-    setTimeout(() => {
-      setSubmitting(false);
+    setSubmitError('');
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          'form-name': 'contact',
+          'bot-field': '',
+          ...formData,
+        }).toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Form submission failed with status ${response.status}`);
+      }
+
       setSubmitted(true);
-    }, 600);
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        company: '',
+        phone: '',
+        interest: 'Software Engineering',
+        message: '',
+      });
+    } catch {
+      setSubmitError(
+        'We could not send your inquiry. Please try again or email info@onegotechnologies.com.'
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -94,7 +124,11 @@ export const CtaBanner: React.FC = () => {
           {/* RIGHT SIDE: Clean Premium Form on White */}
           <div className="lg:col-span-7 bg-white p-10 md:p-14 lg:p-16">
             {submitted ? (
-              <div className="h-full flex flex-col justify-center items-center text-center py-12">
+              <div
+                className="h-full flex flex-col justify-center items-center text-center py-12"
+                role="status"
+                aria-live="polite"
+              >
                 <div className="w-12 h-12 bg-[#1264FF]/10 text-[#1264FF] flex items-center justify-center text-2xl font-bold mb-4 border border-[#1264FF]/20">
                   ✓
                 </div>
@@ -112,14 +146,31 @@ export const CtaBanner: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+                onSubmit={handleSubmit}
+                className="space-y-5"
+              >
+                <input type="hidden" name="form-name" value="contact" />
+                <p className="hidden" aria-hidden="true">
+                  <label htmlFor="bot-field">
+                    Do not fill this out if you are human
+                    <input id="bot-field" name="bot-field" tabIndex={-1} autoComplete="off" />
+                  </label>
+                </p>
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block font-display text-xs font-semibold text-[#101828] mb-2">
+                    <label htmlFor="firstName" className="block font-display text-xs font-semibold text-[#101828] mb-2">
                       First Name <span className="text-[#1264FF]">*</span>
                     </label>
                     <input
+                      id="firstName"
+                      name="firstName"
                       type="text"
+                      autoComplete="given-name"
                       required
                       value={formData.firstName}
                       onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
@@ -128,11 +179,14 @@ export const CtaBanner: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label className="block font-display text-xs font-semibold text-[#101828] mb-2">
+                    <label htmlFor="lastName" className="block font-display text-xs font-semibold text-[#101828] mb-2">
                       Last Name <span className="text-[#1264FF]">*</span>
                     </label>
                     <input
+                      id="lastName"
+                      name="lastName"
                       type="text"
+                      autoComplete="family-name"
                       required
                       value={formData.lastName}
                       onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
@@ -144,11 +198,14 @@ export const CtaBanner: React.FC = () => {
 
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block font-display text-xs font-semibold text-[#101828] mb-2">
+                    <label htmlFor="email" className="block font-display text-xs font-semibold text-[#101828] mb-2">
                       Business Email <span className="text-[#1264FF]">*</span>
                     </label>
                     <input
+                      id="email"
+                      name="email"
                       type="email"
+                      autoComplete="email"
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -157,11 +214,14 @@ export const CtaBanner: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label className="block font-display text-xs font-semibold text-[#101828] mb-2">
+                    <label htmlFor="phone" className="block font-display text-xs font-semibold text-[#101828] mb-2">
                       Phone Number
                     </label>
                     <input
+                      id="phone"
+                      name="phone"
                       type="tel"
+                      autoComplete="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="+1 (555) 000-0000"
@@ -172,11 +232,14 @@ export const CtaBanner: React.FC = () => {
 
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block font-display text-xs font-semibold text-[#101828] mb-2">
+                    <label htmlFor="company" className="block font-display text-xs font-semibold text-[#101828] mb-2">
                       Company
                     </label>
                     <input
+                      id="company"
+                      name="company"
                       type="text"
+                      autoComplete="organization"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                       placeholder="Organization or Venture"
@@ -184,10 +247,12 @@ export const CtaBanner: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label className="block font-display text-xs font-semibold text-[#101828] mb-2">
+                    <label htmlFor="interest" className="block font-display text-xs font-semibold text-[#101828] mb-2">
                       What are you interested in?
                     </label>
                     <select
+                      id="interest"
+                      name="interest"
                       value={formData.interest}
                       onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
                       className="w-full px-3.5 py-2.5 bg-[#F7F9FC] border border-[#D9E1EC] text-[#101828] text-sm focus:outline-none focus:border-[#1264FF] focus:bg-white transition-colors"
@@ -204,10 +269,12 @@ export const CtaBanner: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block font-display text-xs font-semibold text-[#101828] mb-2">
+                  <label htmlFor="message" className="block font-display text-xs font-semibold text-[#101828] mb-2">
                     Tell us about your project / challenge <span className="text-[#1264FF]">*</span>
                   </label>
                   <textarea
+                    id="message"
+                    name="message"
                     rows={4}
                     required
                     value={formData.message}
@@ -216,6 +283,16 @@ export const CtaBanner: React.FC = () => {
                     className="w-full px-3.5 py-2.5 bg-[#F7F9FC] border border-[#D9E1EC] text-[#101828] placeholder-[#5B667A]/50 text-sm focus:outline-none focus:border-[#1264FF] focus:bg-white transition-colors resize-y"
                   />
                 </div>
+
+                {submitError && (
+                  <p
+                    id="contact-form-error"
+                    className="font-body text-sm text-red-700"
+                    role="alert"
+                  >
+                    {submitError}
+                  </p>
+                )}
 
                 <div className="pt-2">
                   <button
@@ -236,4 +313,3 @@ export const CtaBanner: React.FC = () => {
     </section>
   );
 };
-
