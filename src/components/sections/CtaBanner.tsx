@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useInView } from '../../hooks/useInView';
+import { Mail, Phone } from "lucide-react";
 
 export const CtaBanner: React.FC = () => {
   const { ref, isInView } = useInView<HTMLElement>({ threshold: 0.1 });
@@ -114,9 +115,26 @@ export const CtaBanner: React.FC = () => {
                 Healthcare · Real Estate · Transportation · Automation &amp; AI
               </p>
               
-              <div className="mt-6 flex items-center gap-3">
-                <div className="w-2 h-2 bg-[#1264FF]" />
-                <span className="font-display text-xs text-[#D9E1EC]/80 font-medium">hello@onego.tech</span>
+              <div className="mt-6 space-y-4">
+                <a
+                  href="mailto:contact@onegotechnologies.com"
+                  className="group flex items-center gap-3 text-sm text-[#D9E1EC]/80 transition-colors hover:text-white"
+                >
+                  <Mail className="h-4 w-4 shrink-0 text-[#1264FF]" />
+                  <span className="font-display font-medium">
+                    contact@onegotechnologies.com
+                  </span>
+                </a>
+
+                <a
+                  href="tel:+923250606992"
+                  className="group flex items-center gap-3 text-sm text-[#D9E1EC]/80 transition-colors hover:text-white"
+                >
+                  <Phone className="h-4 w-4 shrink-0 text-[#1264FF]" />
+                  <span className="font-display font-medium">
+                    +92 325 0606992
+                  </span>
+                </a>
               </div>
             </div>
           </div>

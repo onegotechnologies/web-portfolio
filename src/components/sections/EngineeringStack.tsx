@@ -5,7 +5,7 @@ const stackCategories = [
   {
     id: 'core',
     title: 'Core Engineering',
-    techs: ['Go', 'Python', 'TypeScript', 'JavaScript', 'C#', 'Java'],
+    techs: ['Go', 'Python', 'TypeScript', 'JavaScript', 'C#', 'Java', 'Swift'],
   },
   {
     id: 'web',
@@ -33,17 +33,40 @@ const stackCategories = [
   {
     id: 'backend',
     title: 'Backend & APIs',
-    techs: ['Go', 'Node.js', 'REST APIs', 'GraphQL', 'gRPC', 'WebSockets', 'Microservices', 'Event-Driven Architecture'],
+    techs: [
+      'Go',
+      'Node.js',
+      'REST APIs',
+      'GraphQL',
+      'gRPC',
+      'WebSockets',
+      'Microservices',
+      'Event-Driven Architecture',
+      'Distributed Systems'
+    ],
   },
   {
     id: 'data',
     title: 'Databases & Data',
-    techs: ['PostgreSQL', 'MongoDB', 'MySQL', 'Microsoft SQL Server', 'Redis', 'Elasticsearch', 'OpenSearch', 'Kafka', 'RabbitMQ', 'pgvector'],
+    techs: [
+      'PostgreSQL',
+      'MongoDB',
+      'MySQL',
+      'Microsoft SQL Server',
+      'Redis',
+      'Elasticsearch',
+      'OpenSearch',
+      'Kafka',
+      'RabbitMQ',
+      'Amazon SQS',
+      'AWS EventBridge',
+      'pgvector',
+    ],
   },
   {
     id: 'cloud',
     title: 'Cloud & Infrastructure',
-    techs: ['AWS', 'Microsoft Azure', 'Google Cloud', 'Docker', 'Kubernetes', 'Terraform', 'Helm', 'Linux', 'Nginx', 'Traefik'],
+    techs: ['AWS', 'Microsoft Azure', 'Google Cloud', 'AWS CloudWatch', 'Docker', 'Kubernetes', 'Terraform', 'Helm', 'Linux', 'Nginx', 'Traefik'],
   },
   {
     id: 'devops',
